@@ -13,9 +13,12 @@ users =[{
         "id": 1,
         "age": 30
     }] 
+OPEN_PATHS = {"/docs", "/redoc", "/openapi.json"}
 @app.middleware("http")
 async def check_api_key(request, call_next):
     api_key = request.headers.get("X-API-Key")
+    if request.url.path in OPEN_PATHS:
+        return await call_next(request)
     if api_key != "my-secret-api-key":
         return JSONResponse(status_code=401, content={"message": "Unauthorized"})
     return await call_next(request)
