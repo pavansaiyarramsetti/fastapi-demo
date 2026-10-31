@@ -22,7 +22,7 @@ async def check_api_key(request, call_next):
 
 @app.get("/welcome")
 async def welcome():
-    return {"message": "Welcome to the API!"}
+    return {"message": "Welcome to the API! here is the change"}
 
 @app.get("/user")
 def user_profile():
